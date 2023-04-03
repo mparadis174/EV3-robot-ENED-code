@@ -5,6 +5,7 @@ import sys
 import time
 from ev3dev2.sound import Sound
 from ev3dev2.motor import Motor, LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, MediumMotor, SpeedPercent
+from ev3dev2.motor import GyroSensor, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4
 
 # default set up code DO NOT TOUCH
 ON = True
@@ -82,8 +83,8 @@ def forward6ft():
     motorLeft.off()
     motorRight.off()
 
-def TurnLeft90():
-    #
+def forward9ft():
+    #setting up the console
     reset_console()
     set_cursor(OFF)
     sound = Sound()
@@ -94,9 +95,56 @@ def TurnLeft90():
     motorRight = Motor(OUTPUT_A)
 
     #makes the motors move
-    motorLeft.on(-20)
+    #speed is 1/4 ft/s
+    motorLeft.on(20)
     motorRight.on(20)
     
     #find time for this from veronica also find out the motor speed as well
-    time.sleep()
-    
+    time.sleep(36)
+    motorLeft.off()
+    motorRight.off()
+
+def TurnLeft90():
+    #dont touch this part
+    reset_console()
+    set_cursor(OFF)
+    sound = Sound()
+    sound.beep()
+
+    #designates the motor involved
+    motorLeft = Motor(OUTPUT_D)
+    motorRight = Motor(OUTPUT_A)
+    gyro = GyroSensor(OUTPUT_4)
+
+    #setup the gyro
+    gyro.reset()
+
+
+
+
+    #makes the motors move
+    motorLeft.on(-20)
+    motorRight.on(20)
+    time.sleep(3.35)
+    motorLeft.off()
+    motorRight.off()
+
+    # angle checking system
+    while gyro.angle() >= 91.5:
+        time.sleep(.5)
+        motorLeft.on(-0.1)
+        motorRight.on(0.1)
+
+    while gyro.angle() >= 89.5:
+        motorLeft.on(0.1)
+        motorRight.on(-0.1)
+        time.sleep(.5)
+    motorLeft.off()
+    motorRight.off()
+
+def Checkdeg():
+    gyro = GyroSensor(OUTPUT_4)
+    gyro.reset()
+    forward6ft
+    degrees = gyro.angle
+    print(degrees)
