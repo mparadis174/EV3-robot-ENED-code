@@ -135,7 +135,7 @@ def TurnLeft90():
         motorLeft.on(-0.1)
         motorRight.on(0.1)
 
-    while gyro.angle() >= 89.5:
+    while gyro.angle() >= 88.5:
         motorLeft.on(0.1)
         motorRight.on(-0.1)
         time.sleep(.5)
