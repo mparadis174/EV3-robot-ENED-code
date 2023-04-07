@@ -45,8 +45,6 @@ def forward3ft():
     #setting up the console
     reset_console()
     set_cursor(OFF)
-    sound = Sound()
-    sound.beep()
 
     #designates the motor involved
     motorLeft = Motor(OUTPUT_D)
@@ -66,20 +64,32 @@ def forward6ft():
     #setting up the console
     reset_console()
     set_cursor(OFF)
-    sound = Sound()
-    sound.beep()
 
     #designates the motor involved
     motorLeft = Motor(OUTPUT_D)
     motorRight = Motor(OUTPUT_A)
 
+    gyro=GyroSensor(OUTPUT_4)
+
+    #setup the gyro
+    gyro.reset()
+
     #makes the motors move
-    #speed is 1/4 ft/s
-    motorLeft.on(20)
-    motorRight.on(20)
+    #speed is 1/2 ft/s
+    motorLeft.on(40)
+    motorRight.on(40)
     
     #find time for this from veronica also find out the motor speed as well
-    time.sleep(24)
+    time.sleep(12)
+    while gyro.angle() >= 0.5:
+        time.sleep(.1)
+        motorLeft.on(-5)
+        motorRight.on(5)
+
+    while gyro.angle() <= 359.5:
+        motorLeft.on(5)
+        motorRight.on(-5)
+        time.sleep(.1)
     motorLeft.off()
     motorRight.off()
 
@@ -87,20 +97,33 @@ def forward9ft():
     #setting up the console
     reset_console()
     set_cursor(OFF)
-    sound = Sound()
-    sound.beep()
 
-    #designates the motor involved
+    #designates the sensors and motor involved
     motorLeft = Motor(OUTPUT_D)
     motorRight = Motor(OUTPUT_A)
+    gyro=GyroSensor(OUTPUT_4)
+
+    #setup the gyro
+    gyro.reset()
 
     #makes the motors move
     #speed is 1/4 ft/s
-    motorLeft.on(20)
-    motorRight.on(20)
+    motorLeft.on(40)
+    motorRight.on(40)
     
     #find time for this from veronica also find out the motor speed as well
-    time.sleep(36)
+    time.sleep(18)
+    while gyro.angle() >= 0.5:
+        time.sleep(.1)
+        motorLeft.on(-5)
+        motorRight.on(5)
+
+    while gyro.angle() <= 359.5:
+        motorLeft.on(5)
+        motorRight.on(-5)
+        time.sleep(.1)
+    motorLeft.off()
+    motorRight.off()
     motorLeft.off()
     motorRight.off()
 
@@ -108,10 +131,9 @@ def TurnLeft90():
     #dont touch this part
     reset_console()
     set_cursor(OFF)
-    sound = Sound()
-    sound.beep()
+    
 
-    #designates the motor involved
+    #designates the motor and sensors involved
     motorLeft = Motor(OUTPUT_D)
     motorRight = Motor(OUTPUT_A)
     gyro = GyroSensor(OUTPUT_4)
@@ -130,15 +152,50 @@ def TurnLeft90():
     motorRight.off()
 
     # angle checking system
-    while gyro.angle() >= 91.5:
-        time.sleep(.5)
-        motorLeft.on(-0.1)
-        motorRight.on(0.1)
+    while gyro.angle() >= 90.5:
+        time.sleep(.1)
+        motorLeft.on(-5)
+        motorRight.on(5)
 
-    while gyro.angle() >= 88.5:
-        motorLeft.on(0.1)
-        motorRight.on(-0.1)
-        time.sleep(.5)
+    while gyro.angle() <= 89.5:
+        motorLeft.on(5)
+        motorRight.on(-5)
+        time.sleep(.1)
+    motorLeft.off()
+    motorRight.off()
+def TurnRight90():
+    #dont touch this part
+    reset_console()
+    set_cursor(OFF)
+
+    #designates the motor involved
+    motorLeft = Motor(OUTPUT_D)
+    motorRight = Motor(OUTPUT_A)
+    gyro = GyroSensor(OUTPUT_4)
+
+    #setup the gyro
+    gyro.reset()
+
+
+
+
+    #makes the motors move
+    motorLeft.on(20)
+    motorRight.on(-20)
+    time.sleep(3.35)
+    motorLeft.off()
+    motorRight.off()
+
+    # angle checking system
+    while gyro.angle() >= 270.5:
+        time.sleep(.1)
+        motorLeft.on(-5)
+        motorRight.on(5)
+
+    while gyro.angle() <= 269.5:
+        motorLeft.on(5)
+        motorRight.on(-5)
+        time.sleep(.1)
     motorLeft.off()
     motorRight.off()
 
@@ -148,3 +205,66 @@ def Checkdeg():
     forward6ft
     degrees = gyro.angle
     print(degrees)
+
+def subtask1():
+    reset_console()
+    set_cursor(OFF)
+    sound = Sound()
+    sound.beep()
+    #move 36 feet
+    forward6ft()
+    forward6ft()
+    forward6ft()
+    forward6ft()
+    forward6ft()
+    forward6ft()
+    TurnRight90()
+    #move 84 feet and turn right
+    x = 0
+    for x in 14:
+        forward6ft()
+    TurnRight90()
+    #move 36 feet
+    forward6ft()
+    forward6ft()
+    forward6ft()
+    forward6ft()
+    forward6ft()
+    forward6ft()
+def subtask2():
+    reset_console()
+    set_cursor(OFF)
+    sound = Sound()
+    sound.beep()
+    #move 12 feet forward then turn left
+    forward6ft()
+    forward6ft()
+    TurnLeft90()
+    #move 96 feet
+    x = 0
+    for x in 14:
+        forward6ft()
+    #turn left then move 12ft
+    TurnLeft90()    
+    forward6ft()
+    forward6ft()
+def barcodeScan():
+    #start up section
+    reset_console()
+    set_cursor(OFF)
+    sound = Sound()
+    sound.beep()
+    #designates the motor involved
+    motorLeft = Motor(OUTPUT_D)
+    motorRight = Motor(OUTPUT_A)
+    gyro = GyroSensor(OUTPUT_4)
+    scanner = ColorSensor(OUTPUT_2)
+
+    #setup the gyro and color sensor
+    gyro.reset()
+    if scanner.color = 
+
+
+    
+
+
