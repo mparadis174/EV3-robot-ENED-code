@@ -5,7 +5,8 @@ import sys
 import time
 from ev3dev2.sound import Sound
 from ev3dev2.motor import Motor, LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, MediumMotor, SpeedPercent
-from ev3dev2.motor import GyroSensor, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4
+from ev3dev2.sensor.lego import GyroSensor, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4
+from ev3dev2.sensor.lego import ColorSensor, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4
 
 # default set up code DO NOT TOUCH
 ON = True
@@ -248,7 +249,7 @@ def subtask2():
     TurnLeft90()    
     forward6ft()
     forward6ft()
-def barcodeScan():
+def barcodeScan(color1, color2, color3, color4):
     #start up section
     reset_console()
     set_cursor(OFF)
@@ -262,9 +263,37 @@ def barcodeScan():
 
     #setup the gyro and color sensor
     gyro.reset()
-    if scanner.color = 
+    if scanner.color == color1:
+        motorLeft.on(20)
+        motorRight.on(-20)
+        time.sleep(.5)
+        if scanner.color == color2:
+            motorLeft.on(20)
+            motorRight.on(-20)
+            time.sleep(.5)
+            if scanner.color == color3:
+                motorLeft.on(20)
+                motorRight.on(-20)
+                time.sleep(.5)
+                if scanner.color == color4:
+                    motorLeft.on(20)
+                    motorRight.on(-20)
+                    return 1
+    return 1
+def lift():
+    liftmo = MediumMotor(OUTPUT_B)
+    liftmo.on(3)
+    time.sleep(.5)
 
-
+def main():
+    motorLeft = Motor(OUTPUT_D)
+    motorRight = Motor(OUTPUT_A)
+    gyro = GyroSensor(OUTPUT_4)
+    scanner = ColorSensor(OUTPUT_2)
+    if (barcodeScan(1,6,1,6) == 1):
+        motorLeft.on(20)
+        motorRight.on(20)
+        time.sleep(.5)
+        lift()
     
-
 
