@@ -280,10 +280,15 @@ def barcodeScan(color1, color2, color3, color4):
                     motorRight.on(-20)
                     return 1
     return 1
-def lift():
-    liftmo = MediumMotor(OUTPUT_B)
-    liftmo.on(3)
-    time.sleep(.5)
+def lift(direction):
+    if direction == 1:
+        liftmo = MediumMotor(OUTPUT_B)
+        liftmo.on(3)
+        time.sleep(.5)
+    else:
+        liftmo = MediumMotor(OUTPUT_B)
+        liftmo.on(-3)
+        time.sleep(.5)
 
 def main():
     motorLeft = Motor(OUTPUT_D)
@@ -294,6 +299,6 @@ def main():
         motorLeft.on(20)
         motorRight.on(20)
         time.sleep(.5)
-        lift()
-    
-
+        lift(1)
+        time.sleep(.5)
+        lift(0)
